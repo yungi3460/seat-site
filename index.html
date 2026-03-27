@@ -1,0 +1,57 @@
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#6a85ff,#bac8ff);
+  text-align:center;
+  color:white;
+}
+
+h1 { margin:20px; font-size:32px; }
+
+/* 전체를 가로로 펼침 */
+.grid { 
+  display:flex; 
+  justify-content:center;
+}
+
+/* 각 줄을 세로로 쌓기 */
+.row { 
+  display:flex; 
+  flex-direction:column; 
+}
+
+/* 자리 */
+.cell {
+  width:55px; height:55px; margin:5px;
+  display:flex; justify-content:center; align-items:center;
+  border-radius:12px;
+  background:white; color:black;
+  font-weight:bold;
+}
+
+/* 칠판, 사물함 */
+.special {
+  background:#ffcc00;
+  color:black;
+  width:60px;
+  height:60px;
+}
+
+/* 버튼 */
+.buttons {
+  margin:20px;
+}
+
+button {
+  padding:12px 25px;
+  margin:5px;
+  font-size:16px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.start { background:#00c853; color:white; }
+.stop { background:#d50000; color:white; }
+</style>
