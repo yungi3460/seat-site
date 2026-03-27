@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>자리배치</title>
+
+<style>
+body {
+  margin:0;
+  font-family: sans-serif;
+  background: linear-gradient(135deg,#6a85ff,#bac8ff);
+  text-align:center;
+  color:white;
+}
+
+h1 { margin:20px; }
+
+/* 전체 가로 */
+.grid {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+
+/* 세로 줄 */
+.column {
+  display:flex;
+  flex-direction:column;
+}
+
+/* 자리 */
+.cell {
+  width:55px;
+  height:55px;
+  margin:5px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius:10px;
+  background:white;
+  color:black;
+  font-weight:bold;
+}
+
+/* 버튼 */
+button {
+  padding:12px 20px;
+  margin:10px;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.start { background:#00c853; color:white; }
+.stop { background:#d50000; color:white; }
+</style>
+</head>
+
+<body>
+
+<h1>🎯 자리배치</h1>
+
+<div class="grid" id="grid"></div>
+
+<div>
+  <button class="start" onclick="start()">START</button>
+  <button class="stop" onclick="stop()">STOP</button>
+</div>
+
+<script>
+const layout = [5,6,5,6,5];
+const total = 27;
+let interval;
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function create() {
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  // 세로 5-6-5-6-5
+  layout.forEach(num => {
+    const col = document.createElement("div");
+    col.className = "column";
+
+    for (let i = 0; i < num; i++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      col.appendChild(cell);
+    }
+
+    grid.appendChild(col);
+  });
+}
+
+function start() {
+  const cells = document.querySelectorAll(".cell");
+
+  interval = setInterval(() => {
+    const nums = shuffle([...Array(total).keys()].map(x=>x+1));
+
+    cells.forEach((c,i)=>{
+      c.innerText = nums[i];
+    });
+  }, 80);
+}
+
+function stop() {
+  clearInterval(interval);
+
+  const cells = document.querySelectorAll(".cell");
+  const nums = shuffle([...Array(total).keys()].map(x=>x+1));
+
+  cells.forEach((c,i)=>{
+    c.innerText = nums[i];
+  });
+}
+
+create();
+</script>
+
+</body>
+</html>
